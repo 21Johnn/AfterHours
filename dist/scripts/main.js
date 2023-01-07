@@ -532,6 +532,26 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"3cYfC":[function(require,module,exports) {
+AOS.init();
+const dataDoEvento = new Date("Oct 10, 2023 20:30:00");
+const timeStamp = dataDoEvento.getTime();
+const contaHoras = setInterval(function() {
+    const agora = new Date();
+    const timeStampAtual = agora.getTime();
+    const tempoAteEvento = timeStamp - timeStampAtual;
+    const diaEmMs = 86400000;
+    const horaEmMs = 3600000;
+    const minutoEmMs = 60000;
+    const diasAteEvento = Math.floor(tempoAteEvento / diaEmMs);
+    const horasAteEvento = Math.floor(tempoAteEvento % diaEmMs / horaEmMs);
+    const minutosAteEvento = Math.floor(tempoAteEvento % horaEmMs / minutoEmMs);
+    const segundosAteEvento = Math.floor(tempoAteEvento % minutoEmMs / 1000);
+    document.getElementById("contador").innerHTML = `${diasAteEvento}d ${horasAteEvento}h ${minutosAteEvento}m ${segundosAteEvento}s`;
+    if (tempoAteEvento < 0) {
+        clearInterval(contaHoras);
+        document.getElementById("contador").innerHTML = "Evento Expirado";
+    }
+}, 1000);
 
 },{}]},["7age3","3cYfC"], "3cYfC", "parcelRequirea6b2")
 
